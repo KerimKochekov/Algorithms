@@ -1,4 +1,4 @@
-```
+```cpp
 #include "bits/stdc++.h"
 #define MAXN 1000009
 #define INF 1000000007
