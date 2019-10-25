@@ -1,4 +1,3 @@
-```cpp
 #include "bits/stdc++.h"
 #define MAXN 1000009
 #define INF 1000000007
@@ -41,7 +40,4 @@ void dfs(int nd){
 		}while(aux!=nd);
 	}
 }
-int main(){
-		
-}
-```
+
