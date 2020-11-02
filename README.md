@@ -6,7 +6,7 @@
 
 2) Any even number greater than 2 can be split into two prime numbers
 
-3) Pragma
+3) Pragmas
 ```
 #pragma GCC optimize("Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
