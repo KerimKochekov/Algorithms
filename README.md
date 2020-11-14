@@ -13,8 +13,8 @@
 ```
 
 4) find all B that B is submask of A
-	for (B = A; B > 0; --B, B&=A);
-	
+```(B = A; B > 0; --B, B&=A);```
+
 5) find all D that A is submask of D
-	for (D = A; D < (1 << n); ++D, D |= A)
+```for (D = A; D < (1 << n); ++D, D |= A)```
 
