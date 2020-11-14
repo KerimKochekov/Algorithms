@@ -1,0 +1,84 @@
+
+struct node {
+        node *l, *r;
+        int x, y;
+
+        node() {
+                l = NULL;
+                r = NULL;
+        }
+
+        node(int x, int y) : x(x), y(y) {
+                l = NULL;
+                r = NULL;
+        }
+
+};
+
+typedef pair<node *, node *> PNN;
+
+PNN split(node *v, int x) {
+        if (v == NULL) {
+                PNN p;
+                p.first = NULL;
+                p.second = NULL;
+                return p;
+        }
+
+        if (v->x < x) {
+                PNN foo = split(v->r, x);
+                v->r = foo.first; // L
+                return make_pair(v, foo.second);
+        } else {
+                PNN foo = split(v->l, x);
+                v->l = foo.second; // R
+                return make_pair(foo.first, v);
+        }
+}
+
+node *merge(node *l, node *r) {
+        if (l == NULL) return r;
+        if (r == NULL) return l;
+        if (l->y < r->y) {
+                l->r = merge(l->r, r);
+                return l;
+        } else {
+                r->l = merge(l, r->l);
+                return r;
+        }
+}
+
+node *add(node *T, node *v) {
+        if (v->y < T->y) {
+                PNN foo = split(T, v->x);
+                v->l = foo.first;
+                v->r = foo.second;
+                return v;
+        }
+        if (v->x < T->x) {
+                return add(T->l, v);
+        } else {
+                return add(T->r, v);
+        }
+}
+
+node *del(node *T, int x) {
+        if (T->x == x) {
+                return merge(T->l, T->r);
+        }
+        if (T->x < x) {
+                T->r = del(T->r, x);
+        } else T->l = del(T->l, x);
+}
+
+
+
+//int count(node* t, int l, int r) {
+//        if (!t) return 0;
+//        if (r < t->minval || t->maxval < l) return 0;
+//        if (t->minval <= l && r <= t->maxval) return t->sum;
+//        return count(t->l, l, r) + count(t->r, l, r) + (l <= x && x <= r ? t->y : 0);
+//}
+
+
+

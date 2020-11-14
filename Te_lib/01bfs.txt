@@ -1,0 +1,24 @@
+VPI g[N];
+
+void BFS01(int s) {
+    VI d(N, INF);
+
+    d[s] = 0;
+    deque<int> q;
+    q.push_back(s);
+
+    while (!q.empty()) {
+        int v = q.front();
+
+        for (auto[u, w]:g[v]) {
+
+            if (d[u] > d[v] + w) {
+
+                d[u] = d[v] + w;
+                if (w) q.push_back(u);
+                else q.push_front(u);
+            }
+        }
+    }
+}
+

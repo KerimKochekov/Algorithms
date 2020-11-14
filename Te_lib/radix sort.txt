@@ -1,0 +1,27 @@
+
+const int BASE = 100; 
+
+void count_sort(int a[], int n) {
+
+	// array index starts with 1
+
+
+        int cnt[BASE];
+        int b[N];
+        ll exp = 1;
+
+        int mx = *max_element(a + 1, a + n + 1);
+        while (mx / exp) {
+
+                fill(cnt, cnt + BASE, 0);
+
+                for (int i = 1; i <= n; i++) cnt[(a[i] / exp) % BASE]++;
+
+                for (int i = 1; i < BASE; i++) cnt[i] += cnt[i - 1];
+
+                for (int i = n; i >= 1; i--) b[cnt[(a[i] / exp) % BASE]--] = a[i];
+
+                for (int i = 1; i <= n; i++) a[i] = b[i];
+                exp *= BASE;
+        }
+}

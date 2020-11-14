@@ -1,0 +1,89 @@
+
+#define N 20000000
+
+int L[N];
+int R[N];
+int t[N];
+int quer_ind[N];
+int next_free = 0;
+const int MAX_N = 100000;
+
+void build(int v, int tl, int tr) {
+        if (tl == tr) {
+                return;
+        } else {
+                L[v] = ++next_free;
+                R[v] = ++next_free;
+                int tm = (tl + tr) >> 1;
+                build(L[v], tl, tm);
+                build(R[v], tm + 1, tr);
+        }
+}
+
+
+void update(int pos, int v, int orig_v, int tl, int tr) {
+
+        if (tl == tr) {
+                t[v] = t[orig_v] + 1;
+                return;
+        }
+        int tm = (tl + tr) >> 1;
+        if (pos <= tm) {
+                L[v] = ++next_free;
+                R[v] = R[orig_v];
+                update(pos, L[v], L[orig_v], tl, tm);
+        } else {
+                L[v] = L[orig_v];
+                R[v] = ++next_free;
+                update(pos, R[v], R[orig_v], tm + 1, tr);
+        }
+        t[v] = t[L[v]] + t[R[v]];
+}
+
+int get(int v1, int v2, int tl, int tr, int k) {
+        if (tl == tr) {
+                return tl;
+        }
+        int tm = (tl + tr) >> 1;
+        int cnt = t[L[v2]] - t[L[v1]];
+        if (cnt >= k) {
+                return get(L[v1], L[v2], tl, tm, k);
+        } else return get(R[v1], R[v2], tm + 1, tr, k - cnt);
+}
+
+int k_th(int l, int r, int k) {
+        return get(quer_ind[l - 1], quer_ind[r], 0, MAX_N, k);
+}
+
+void solve() {
+        srand(time(NULL));
+        int n = 10000;
+        int a[10001];
+        build(0, 0, MAX_N);
+        for (int i = 1; i <= n; i++) {
+                a[i] = rand() % MAX_N;
+                quer_ind[i] = ++next_free;
+                update(a[i], quer_ind[i], quer_ind[i - 1], 0, MAX_N);
+                cout << a[i] << ' ';
+        }
+
+        cout << endl;
+        cout << next_free << endl;
+
+        for (int i = 0; i < n; i++) {
+                int l = rand() % n + 1;
+                int r = rand() % n + 1;
+                if (l > r) swap(l, r);
+                int k = rand() % (r - l + 1) + 1;
+                cout << l << ' ' << r << ' ' << k << endl;
+
+                VI v;
+                for (int j = l; j <= r; j++) v.push_back(a[j]);
+                sort(ALL(v));
+                int kth = k_th(l, r, k);
+                int x = v[k - 1];
+                assert(x == kth);
+        }
+
+}
+

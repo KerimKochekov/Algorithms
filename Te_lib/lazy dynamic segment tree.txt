@@ -1,0 +1,113 @@
+
+template<typename T>
+struct DynamicST {
+
+
+        struct node {
+                node *l, *r;
+                T val;
+                T lazy;
+
+                node(T val) : val(val) { l = NULL, r = NULL; }
+
+                node() {
+                        l = NULL, r = NULL;
+                        val = {};
+                        lazy = {};
+                }
+
+                void shift() {
+                        if (lazy) {
+                                l->lazy += lazy;
+                                r->lazy += lazy;
+                                val += lazy;
+                                lazy = {};
+                        }
+                }
+        };
+
+
+        int MIN_N;
+        int MAX_N;
+        node *root;
+
+        DynamicST(int minN, int maxN) {
+                MIN_N = minN;
+                MAX_N = maxN;
+                root = new node();
+        }
+
+
+        DynamicST() {
+                MIN_N = 1;
+                MAX_N = 1000000000;
+                root = new node();
+        }
+
+
+        T comb(T a, T b) {
+                return max(a, b);
+        }
+
+        void update(int l, int r, T delta) { update(l, r, delta, root, MIN_N, MAX_N); }
+
+        void update(int l, int r, T delta, node *v, int tl, int tr) {
+
+                if (l > tr || r < tl) return;
+                if (l <= tl && tr <= r) {
+                        if (tl != tr) {
+                                if (v->l == NULL) v->l = new node();
+                                if (v->r == NULL) v->r = new node();
+                                v->lazy += delta;
+                                v->shift();
+                        } else {
+                                v->val += delta + v->lazy;
+                                v->lazy = {};
+                        }
+                        return;
+                }
+
+                int tm = tl + (tr - tl + 1) / 2 - 1;
+                assert(tl <= tm && tr != tm);
+
+                if (v->l == NULL) v->l = new node();
+                if (v->r == NULL) v->r = new node();
+
+                v->shift();
+
+                update(l, r, delta, v->l, tl, tm);
+                update(l, r, delta, v->r, tm + 1, tr);
+
+                v->val = comb(v->l->val + v->l->lazy, v->r->val + v->r->lazy);
+        }
+
+        T get(int l, int r) { return get(l, r, root, MIN_N, MAX_N); }
+
+        T get(int l, int r, node *v, int tl, int tr) {
+                if (l > tr || r < tl) return {};
+                if (l <= tl && tr <= r) {
+                        if (tl != tr) {
+
+                                if (v->l == NULL) v->l = new node();
+                                if (v->r == NULL) v->r = new node();
+
+                                v->shift();
+                                return v->val;
+
+                        } else {
+                                v->val += v->lazy;
+                                v->lazy = {};
+                                return v->val;
+                        }
+                };
+
+                int tm = tl + (tr - tl + 1) / 2 - 1;
+
+                if (v->l == NULL) v->l = new node();
+                if (v->r == NULL) v->r = new node();
+                v->shift();
+
+                return comb(get(l, r, v->l, tl, tm), get(l, r, v->r, tm + 1, tr));
+        }
+
+};

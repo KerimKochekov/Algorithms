@@ -1,0 +1,38 @@
+
+template<typename T>
+struct Qmin {
+        int q_front = 0, q_back = 0;
+        bool PRINT_QUEUE = false;
+        deque<pair<T, int> > mins;
+        deque<T> elements;
+
+
+        void pop() {
+                if (mins.front().second == q_front++) {
+                        mins.pop_front();
+                }
+                if (PRINT_QUEUE) elements.pop_front();
+        }
+
+        void push(T x) {
+                while (!mins.empty() && mins.back().first >= x) {
+                        mins.pop_back();
+                }
+                mins.push_back({x, q_back++});
+                if (PRINT_QUEUE) elements.push_back(x);
+        }
+
+        T getmin() {
+                return mins.front().first;
+        }
+
+        void out() {
+                cout << "\t In queue: \t";
+                for (auto x:elements) {
+                        cout << x.second << ' ';
+                }
+                cout << endl;
+        }
+
+};
+

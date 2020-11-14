@@ -11,3 +11,10 @@
 #pragma GCC optimize("Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 ```
+
+4) find all B that B is submask of A
+	for (B = A; B > 0; --B, B&=A);
+	
+5) find all D that A is submask of D
+	for (D = A; D < (1 << n); ++D, D |= A)
+

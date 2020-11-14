@@ -1,0 +1,31 @@
+
+struct Node {
+        Node *prev, *next; // указатели на следующий и предыдущий элементы списка
+        int x;
+};
+struct List {
+        Node *head, *tail; // head , tail - фиктивные элементы
+};
+
+Node *find(List l, int x) { // найти в списке за линию
+        for (Node *p = l.head->next; p != l.tail; p = p -> next)
+                if (p -> x == x)
+                        return p;
+        return 0;
+}
+
+Node *erase(Node *v) {
+        v->prev->next = v->next;
+        v->next->prev = v->prev;
+}
+
+Node *push_back(List &l, Node *v) {
+        Node *p = new Node();
+        p -> x = x, p -> prev = l.tail -> prev, p -> next = l.tail;
+        p -> prev -> next = p, p -> next -> prev = p;
+}
+
+void makeEmpty(List &l) { // создать новый пустой список
+        l.head = new Node(), l.tail = new Node();
+        l.head -> next = l.tail, l.tail -> prev = l.head;
+}

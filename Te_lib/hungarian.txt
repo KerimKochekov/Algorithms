@@ -1,0 +1,55 @@
+
+vector<pair<int, int> > hungarian(const vector<vector<int> > &a) {
+	
+    int n = a.size(), m = a[0].size();
+
+    vector<int> u(n, 0), v(m, 0);
+    vector<int> marked_index(m, -1);
+
+    for (int i = 0; i < n; i++) {
+        vector<int> links(m, -1);
+        vector<int> mins(m, INF);
+        vector<int> visited(m, 0);
+        int markedI = i, markedJ = -1, j;
+        while (markedI != -1) {
+
+            j = -1;
+            for (int k = 0; k < m; k++) {
+                if (!visited[k]) {
+                    if (a[markedI][k] - u[markedI] - v[k] < mins[k]) {
+                        mins[k] = a[markedI][k] - u[markedI] - v[k];
+                        links[k] = markedJ;
+                    }
+                    if (j == -1 || mins[k] < mins[j]) j = k;
+                }
+
+            }
+            int delta = mins[j];
+            for (int k = 0; k < m; k++) {
+                if (visited[k]) {
+                    u[marked_index[k]] += delta;
+                    v[k] -= delta;
+                } else {
+                    mins[k] -= delta;
+                }
+            }
+            u[i] += delta;
+            visited[j] = 1;
+            markedJ = j;
+            markedI = marked_index[j];
+        }
+
+        for (; links[j] != -1; j = links[j])
+            marked_index[j] = marked_index[links[j]];
+        marked_index[j] = i;
+    }
+
+    vector<pair<int, int> > res;
+    for (int j = 0; j < m; j++) {
+        if (marked_index[j] != -1) {
+            res.emplace_back(marked_index[j], j);
+        }
+    }
+    return res;
+}
+
