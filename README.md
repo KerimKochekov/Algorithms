@@ -18,3 +18,5 @@
 5) find all D that A is submask of D
 ```for (D = A; D < (1 << n); ++D, D |= A)```
 
+6) Rotate board 45 degree by (x,y) -> (x+y,y-x), so Manhattan distance between two points would be max(|x1-x2|,|y1-y2|)
+
