@@ -20,3 +20,22 @@
 
 6) Rotate board 45 degree by (x,y) -> (x+y,y-x), so Manhattan distance between two points would be max(|x1-x2|,|y1-y2|)
 
+7) Find any x,y such that ax+by=gcd(a,b) for given two integers a and b with EEA(Extended Euclidean Algorithm )
+```
+int gcd(int a, int b, int& x, int& y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    int x1, y1;
+    int d = gcd(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+    return d;
+}
+```
+
+8) There is no assumption that n1 and n2 are coprime. Find an integer x that satisfies:<br>
+![](https://espresso.codeforces.com/bb121fa59f669935e3b01fd4dd0e9278e3e33fa8.png) <br>
+Answer: ![](https://espresso.codeforces.com/5c24e7d9eb7072de51e66f33018c45b316cc1318.png), where d=gcd(n1,n2) and x' from EEA we can find (x', y') such that n1x' + n2y' = d
