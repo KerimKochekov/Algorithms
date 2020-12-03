@@ -39,3 +39,6 @@ int gcd(int a, int b, int& x, int& y) {
 8) There is no assumption that n1 and n2 are coprime. Find an integer x that satisfies:<br>
 ![](https://espresso.codeforces.com/bb121fa59f669935e3b01fd4dd0e9278e3e33fa8.png) <br>
 Answer: ![](https://espresso.codeforces.com/5c24e7d9eb7072de51e66f33018c45b316cc1318.png), where d=gcd(n1,n2) and x' from EEA we can find (x', y') such that n1x' + n2y' = d
+
+9) gcd(lcm(x,y1),lcm(x,y2),...,lcm(x,yk)) = lcm(x,gcd(y1,y2,...,yk)) <br>
+   lcm(gcd(x,y1),gcd(x,y2),...,gcd(x,yk)) = gcd(x,lcm(y1,y2,...,yk)) <br>
