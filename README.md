@@ -40,8 +40,11 @@ int gcd(int a, int b, int& x, int& y) {
 ![](https://espresso.codeforces.com/bb121fa59f669935e3b01fd4dd0e9278e3e33fa8.png) <br>
 Answer: ![](https://espresso.codeforces.com/5c24e7d9eb7072de51e66f33018c45b316cc1318.png), where d=gcd(n1,n2) and x' from EEA we can find (x', y') such that n1x' + n2y' = d
 
-9) gcd(lcm(x,y1),lcm(x,y2),...,lcm(x,yk)) = lcm(x,gcd(y1,y2,...,yk)) <br>
-   lcm(gcd(x,y1),gcd(x,y2),...,gcd(x,yk)) = gcd(x,lcm(y1,y2,...,yk)) <br>
+9) ![](https://latex.codecogs.com/gif.latex?gcd%28lcm%28x%2Cy_1%29%2Clcm%28x%2Cy_2%29%2C...%2Clcm%28x%2Cy_k%29%29%20%3D%20lcm%28x%2Cgcd%28y_1%2Cy_2%2C...%2Cy_k%29%29) <br>
+   ![](https://latex.codecogs.com/gif.latex?lcm%28gcd%28x%2Cy_1%29%2Cgcd%28x%2Cy_2%29%2C...%2Cgcd%28x%2Cy_k%29%29%20%3D%20gcd%28x%2Clcm%28y_1%2Cy_2%2C...%2Cy_k%29%29) <br>
+
+10)![](https://latex.codecogs.com/gif.latex?gcd%28x%2Cy%29%3Dgcd%28x-y%2Cy%29%2C%20x%3Ey)<br>
+   ![](https://latex.codecogs.com/gif.latex?gcd%28x%2Cy%2Cz%2C...%29%20%3D%20gcd%28x-y%2Cy%2Cz%2C...%29)<br>
    
-10) For some permutation ![](https://latex.codecogs.com/gif.latex?p) with length ![](https://latex.codecogs.com/gif.latex?n) the absolute differences of adjacent values equal to sum of numbers between positions of ![](https://latex.codecogs.com/gif.latex?i) and ![](https://latex.codecogs.com/gif.latex?i&plus;1) for each ![](https://latex.codecogs.com/gif.latex?1%5Cle%20i%3Cn). <br>
+11) For some permutation ![](https://latex.codecogs.com/gif.latex?p) with length ![](https://latex.codecogs.com/gif.latex?n) the absolute differences of adjacent values equal to sum of numbers between positions of ![](https://latex.codecogs.com/gif.latex?i) and ![](https://latex.codecogs.com/gif.latex?i&plus;1) for each ![](https://latex.codecogs.com/gif.latex?1%5Cle%20i%3Cn). <br>
 More formally: ![](https://latex.codecogs.com/gif.latex?%5Csum%20%7Cp_i-p_%7Bi&plus;1%7D%7C%20%3D%20%5Csum%20%7Cp_i%5E%7B-1%7D-p_%7Bi&plus;1%7D%5E%7B-1%7D%7C)
