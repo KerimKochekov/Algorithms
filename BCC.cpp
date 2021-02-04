@@ -19,13 +19,18 @@ template<class T>bool umin(T& a,T b){if(a>b){a=b;return 1;}return 0;}
 template<class T>bool umax(T& a,T b){if(a<b){a=b;return 1;}return 0;}
 int fup[MAXN],tin[MAXN],TIM,S,comp[MAXN];
 stack<int>st;
-vector<int>adj[MAXN],group[MAXN];
-void dfs(int nd){
+vector<int>adj[MAXN];
+void dfs(int nd,int pr=-1){
 	tin[nd]=fup[nd]=++TIM;
 	st.push(nd);
+	int seen=0;
 	tr(it,adj[nd]){
+		if(*it==pr and !seen){
+			seen=true;
+			continue;
+		}
 		if(!tin[*it]){
-			dfs(*it);
+			dfs(*it,nd);
 			umin(fup[nd],fup[*it]);	
 		}
 		else
@@ -36,7 +41,6 @@ void dfs(int nd){
 		do{
 			aux=st.top();st.pop();
 			comp[aux]=S;
-			group[S].pb(aux);
 		}while(aux!=nd);
 	}
 }
