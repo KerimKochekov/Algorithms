@@ -1,13 +1,16 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-#define endl '\n'
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+#include "time.h"
 
 unsigned char mask[] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
+
+#define endl '\n'
 #define tget(i) ((t[(i) / 8] & mask[(i) % 8]) ? 1 : 0)
 #define tset(i, b) t[(i) / 8] = (b) ? (mask[(i) % 8] | t[(i) / 8]) : ((~mask[(i) % 8]) & t[(i) / 8])
 #define chr(i) (cs == sizeof(int) ? ((int*) s)[i] : ((unsigned char*) s)[i])
 #define isLMS(i) (i > 0 && tget(i) && !tget(i - 1))
+
 void getBuckets(unsigned char* s, int* bkt, int n, int K, int cs, int end) {
     for (int i = 0; i <= K; i++) {
         bkt[i] = 0;
@@ -113,8 +116,7 @@ void buildSA(unsigned char* s, int* SA, int n, int K, int cs) {
     }
     induceSAl(t, SA, s, bkt, n, K, cs, 0);
     induceSAs(t, SA, s, bkt, n, K, cs, 1);
-    free(bkt);
-    free(t);
+    free(bkt); free(t);
 }
 struct SuffixArray {
     static const int maxn = 2e6 + 5;
@@ -149,64 +151,23 @@ struct SuffixArray {
             if (!~phi[i]) {pclp[i] = 0; continue;}
             while (s[i + L] == s[phi[i] + L] && s[i + L] != sep) L++;
             pclp[i] = L;
-            L = max(L - 1, 0);
+            if(L > 0) L--;
         }
         for (int i = 0; i < n; i++) lcp[i] = pclp[sa[i]];
     }
 } sa;
 
-
-//int main() {
-//    sa.build((char*) "randomstring");
-//    for (int i = 0; i < sa.n; i++) cout << sa.sa[i] << " \n"[i == sa.n - 1];
-//    for (int i = 0; i < sa.n; i++) cout << sa.ra[0][i] << " \n"[i == sa.n - 1];
-//    for (int i = 0; i < sa.n; i++) cout << sa.lcp[i] << " \n"[i == sa.n - 1];
-//    /*
-//    Expected:
-//    1 3 11  9 5 2 10  4 0 8 6 7
-//    8 0  5  1 7 4 10 11 9 3 6 2
-//    0 0  0  0 0 0  1  0 0 1 0 0
-//     */
-//    return 0;
-//}
-
-const int maxn = 2e6+10;
-
-char s[maxn];
 int main() {
-//	freopen("inp.txt", "r", stdin);
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	int test = 1;
-//	cin >> test;
-	while (test--) {
-		int n = 0;
-		scanf("%d", &n);
-//		string s;
-		scanf("%s", s);
-//		cout << s << endl;
-		long long res = 0;
-		sa.build(s);
-		for(int i=1;i<n;i++) {
-			int p = sa.sa[i-1];
-			int p1 = sa.sa[i];
-			int lcp = sa.lcp[i];
-			if (p > p1) swap(p, p1);
-			if (p + lcp > p1) {
-				int t = p1 - p;
-				res = max(res, 1ll * t * (n - p1));
-				res = max(res, 1ll * p1 * t);
-			} else {
-				res = max(res, 1ll * lcp * p1);
-				res = max(res, 1ll * lcp * (n - (p + lcp)));
-			}
-//			cerr << p<<" " << p1 <<" " << lcp << " " << res << endl;
-		}
-		
-		cout << res << endl;
-	}
-	
-	cerr << 1000.0 * clock() / CLOCKS_PER_SEC << " ms" << endl;
-	
-	return 0;
+    sa.build((char*) "randomstring");
+    for (int i = 0; i < sa.n; i++) printf("%d ",sa.sa[i]); puts("");
+    for (int i = 0; i < sa.n; i++) printf("%d ",sa.ra[i]); puts("");
+    for (int i = 0; i < sa.n; i++) printf("%d ",sa.lcp[i]); puts("");
+    /*
+    	Expected:
+	    1 3 11  9 5 2 10  4 0 8 6 7
+	    8 0  5  1 7 4 10 11 9 3 6 2
+	    0 0  0  0 0 0  1  0 0 1 0 0
+    */
+    printf("%lf ms\n",1000.0 * clock() / CLOCKS_PER_SEC);
+    return 0;
 }
