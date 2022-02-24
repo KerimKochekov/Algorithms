@@ -25,10 +25,6 @@ void dfs(int nd,int pr=-1){
 	st.push(nd);
 	int seen=0;
 	tr(it,adj[nd]){
-		if(*it==pr and !seen){
-			seen=true;
-			continue;
-		}
 		if(!tin[*it]){
 			dfs(*it,nd);
 			umin(fup[nd],fup[*it]);	
