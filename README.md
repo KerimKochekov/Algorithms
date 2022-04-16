@@ -1,3 +1,6 @@
+# Prepared reference link
+https://hackmd.io/YZDNajrWTc2YXvySPKQQlA?view
+
 # Tricks
 1) Sum-Xor property <br>
 ![](https://latex.codecogs.com/gif.latex?a&plus;b%20%3D%20a%20%5Coplus%20b%20&plus;%202%28a%5CAnd%20b%29) <br>
