@@ -1,6 +1,18 @@
 # Prepared reference link
 https://hackmd.io/YZDNajrWTc2YXvySPKQQlA?view
 
+# Lambda (C++11 stuff)
+Function in Function
+```cpp
+	auto function = [](auto x){
+		return ...;
+	};
+```
+Boolean Comporator
+```cpp
+    sort(q, q + n, [&](int A, int B) { return A < B; });
+```
+
 # Tricks
 1) Sum-Xor property <br>
 ![](https://latex.codecogs.com/gif.latex?a&plus;b%20%3D%20a%20%5Coplus%20b%20&plus;%202%28a%5CAnd%20b%29) <br>
