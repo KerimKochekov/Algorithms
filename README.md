@@ -36,7 +36,6 @@ Boolean Comporator
 
 7) Find any x,y such that ax+by=gcd(a,b) for given two integers a and b with [Extended Euclidean Algorithm](https://cp-algorithms.com/algebra/extended-euclid-algorithm.html#algorithm)
 
-```
 
 8) There is no assumption that n1 and n2 are coprime. Find an integer x that satisfies:<br>
 ![](https://espresso.codeforces.com/bb121fa59f669935e3b01fd4dd0e9278e3e33fa8.png) <br>
@@ -47,5 +46,3 @@ Answer: ![](https://espresso.codeforces.com/5c24e7d9eb7072de51e66f33018c45b316cc
 
 10) ![](https://latex.codecogs.com/gif.latex?gcd%28x%2Cy%29%3Dgcd%28x-y%2Cy%29%2C%20x%3Ey) , so it applies for multiple arguments ![](https://latex.codecogs.com/gif.latex?gcd%28x%2Cy%2Cz%2C...%29%20%3D%20gcd%28x-y%2Cy%2Cz%2C...%29)<br>
    
-11) For some permutation ![](https://latex.codecogs.com/gif.latex?p) with length ![](https://latex.codecogs.com/gif.latex?n) the absolute differences of adjacent values equal to sum of numbers between positions of ![](https://latex.codecogs.com/gif.latex?i) and ![](https://latex.codecogs.com/gif.latex?i&plus;1) for each ![](https://latex.codecogs.com/gif.latex?1%5Cle%20i%3Cn). <br>
-More formally: ![](https://latex.codecogs.com/gif.latex?%5Csum%20%7Cp_i-p_%7Bi&plus;1%7D%7C%20%3D%20%5Csum%20%7Cp_i%5E%7B-1%7D-p_%7Bi&plus;1%7D%5E%7B-1%7D%7C)
