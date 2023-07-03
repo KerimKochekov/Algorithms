@@ -1,5 +1,5 @@
-# Lambda (C++11 stuff)
-Function in Function
+# Lambda operator (applicable beyond C++11)
+Inner-function in Function
 ```cpp
 	auto function = [](auto x){
 		return ...;
@@ -10,15 +10,15 @@ Boolean Comporator
     sort(q, q + n, [&](int A, int B) { return A < B; });
 ```
 
-# Tricks
+# Techniques
 1) Sum-Xor property <br>
-![](https://latex.codecogs.com/gif.latex?a&plus;b%20%3D%20a%20%5Coplus%20b%20&plus;%202%28a%5CAnd%20b%29) <br>
-![](https://latex.codecogs.com/gif.latex?a&plus;b%3Da%5Cvert%20b%20&plus;%20a%5CAnd%20b) <br>
-![](https://latex.codecogs.com/gif.latex?a%20%5Coplus%20b%20%3D%20a%5Cvert%20b%20-%20a%5CAnd%20b) <br>
+$a + b = a \oplus b + 2 (a \land b)$ <br>
+$a + b = a | b + a \land b$ <br>
+$a \oplus b = a | b - a \land b$
 
-2) Any even number greater than 2 can be split into two prime numbers
+3) Conjecture: Any even number greater than 2 can be split into two prime numbers
 
-3) Pragmas
+4) Pragmas for speedup
 ```
 #pragma GCC optimize ("O3")
 #pragma GCC optimize ("unroll-loops")
@@ -32,17 +32,18 @@ Boolean Comporator
 5) find all D that A is submask of D
 ```for (D = A; D < (1 << n); ++D, D |= A)```
 
-6) Rotate board 45 degree by (x,y) -> (x+y,y-x), so Manhattan distance between two points would be max(|x1-x2|,|y1-y2|)
+6) Rotate board 45 degree by $(x,y) \rightarrow (x+y,y-x)$, so [Manhattan distance](https://simple.wikipedia.org/wiki/Manhattan_distance) between two points would be $max(|x1-x2|, |y1-y2|)$.
 
-7) Find any x,y such that ax+by=gcd(a,b) for given two integers a and b with [Extended Euclidean Algorithm](https://cp-algorithms.com/algebra/extended-euclid-algorithm.html#algorithm)
+7) Find any x,y such that $ax + by = gcd(a,b)$ for given two non-negative integers a and b with [Extended Euclidean Algorithm](https://cp-algorithms.com/algebra/extended-euclid-algorithm.html#algorithm)
 
 
-8) There is no assumption that n1 and n2 are coprime. Find an integer x that satisfies:<br>
-![](https://espresso.codeforces.com/bb121fa59f669935e3b01fd4dd0e9278e3e33fa8.png) <br>
-Answer: ![](https://espresso.codeforces.com/5c24e7d9eb7072de51e66f33018c45b316cc1318.png), where d=gcd(n1,n2) and x' from EEA we can find (x', y') such that n1x' + n2y' = d<br>
+8) There is no assumption that n1 and n2 are coprime. Find an integer x that satisfies:
+- $x \equiv a_1 (mod n_1)$
+- $x \equiv a_2 (mod n_2)$
 
-9) ![](https://latex.codecogs.com/gif.latex?gcd%28lcm%28x%2Cy_1%29%2Clcm%28x%2Cy_2%29%2C...%2Clcm%28x%2Cy_k%29%29%20%3D%20lcm%28x%2Cgcd%28y_1%2Cy_2%2C...%2Cy_k%29%29) <br>
-   ![](https://latex.codecogs.com/gif.latex?lcm%28gcd%28x%2Cy_1%29%2Cgcd%28x%2Cy_2%29%2C...%2Cgcd%28x%2Cy_k%29%29%20%3D%20gcd%28x%2Clcm%28y_1%2Cy_2%2C...%2Cy_k%29%29) <br>
+where $d = gcd(n1,n2)$ and $(x', y')$ is retrieved with help of EEA to find $n1x' + n2y' = d$.
 
-10) ![](https://latex.codecogs.com/gif.latex?gcd%28x%2Cy%29%3Dgcd%28x-y%2Cy%29%2C%20x%3Ey) , so it applies for multiple arguments ![](https://latex.codecogs.com/gif.latex?gcd%28x%2Cy%2Cz%2C...%29%20%3D%20gcd%28x-y%2Cy%2Cz%2C...%29)<br>
+9) $gcd(lcm(x, y_1), lcm(x, y_2), \dots, lcm(x, y_k)) = lcm(x, gcd(y1, y2, \dots, y_k))$
+10) $lcm(gcd(x, y_1), gcd(x, y_2), \dots, gcd(x, y_k)) = gcd(x, lcm(y1, y2, \dots, y_k))$
+11) For any $x \geq y$ the $gcd(x, y) = gcd(x - y, y)$, which can be extended for multiple arguments $gcd(x, y, z, \dots) = gcd(x-y, y, z, \dots)$
    
