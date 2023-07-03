@@ -1,6 +1,3 @@
-# Prepared reference link
-https://hackmd.io/YZDNajrWTc2YXvySPKQQlA?view
-
 # Lambda (C++11 stuff)
 Function in Function
 ```cpp
@@ -37,20 +34,8 @@ Boolean Comporator
 
 6) Rotate board 45 degree by (x,y) -> (x+y,y-x), so Manhattan distance between two points would be max(|x1-x2|,|y1-y2|)
 
-7) Find any x,y such that ax+by=gcd(a,b) for given two integers a and b with EEA(Extended Euclidean Algorithm )
-```
-int gcd(int a, int b, int& x, int& y) {
-    if (b == 0) {
-        x = 1;
-        y = 0;
-        return a;
-    }
-    int x1, y1;
-    int d = gcd(b, a % b, x1, y1);
-    x = y1;
-    y = x1 - y1 * (a / b);
-    return d;
-}
+7) Find any x,y such that ax+by=gcd(a,b) for given two integers a and b with [Extended Euclidean Algorithm](https://cp-algorithms.com/algebra/extended-euclid-algorithm.html#algorithm)
+
 ```
 
 8) There is no assumption that n1 and n2 are coprime. Find an integer x that satisfies:<br>
